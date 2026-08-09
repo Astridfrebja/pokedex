@@ -18,3 +18,12 @@ __pycache__/
 # Dataset
 dataset/*
 !dataset/.gitkeep
+
+# TensorFlow checkpoints
+checkpoints/
+
+# TensorBoard logs
+logs/
+
+# Python cache
+.pytest_cache/
