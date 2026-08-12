@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pokédex</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+          <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+
+<body>
+
+    <div id="pokedex">
+
+        <img
+            id="frame"
+            src="{{ url_for('static', filename='images/ramme.png') }}">
+
+        <img
+            id="screen"
+            src="{{ url_for('static', filename='images/skjerm.png') }}">
+        
+        <button id = "button">
+            <img 
+                src="{{ url_for('static', filename='images/knapp.png') }}">
+        </button>
+    </div>
+
+    <input
+    type="file"
+    id="image-picker"
+    accept="image/*"
+    capture="environment"
+    hidden>
+
+</body>
+
+</html>

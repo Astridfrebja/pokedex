@@ -1,30 +1,42 @@
-# Imports
 import tensorflow as tf
 from tensorflow import keras
 
-model = keras.models.load_model("models/pokemon_model.keras")
+MODEL_PATH = "models/pokemon_model.keras"
+CLASS_NAMES_PATH = "models/class_names.txt"
+IMAGE_SIZE = (224, 224)
 
-with open("models/class_names.txt", "r") as file:
+model = keras.models.load_model(MODEL_PATH)
+
+with open(CLASS_NAMES_PATH) as file:
     class_names = file.read().splitlines()
 
-IMAGE_PATH = "images/pikachu.png"
 
-image = keras.utils.load_img(
-    IMAGE_PATH,
-    target_size=(224, 224)
-)
+def predict(image_path):
 
-image_array = keras.utils.img_to_array(image)
+    image = keras.utils.load_img(
+        image_path,
+        target_size=IMAGE_SIZE
+    )
 
-image_array = tf.expand_dims(image_array, axis=0)
+    image_array = keras.utils.img_to_array(image)
+    image_array = tf.expand_dims(image_array, axis=0)
 
-predictions = model.predict(image_array)
+    predictions = model.predict(image_array, verbose=0)
 
-predicted_index = tf.argmax(predictions[0]).numpy()
+    top_3 = tf.argsort(
+        predictions[0],
+        direction="DESCENDING"
+    )[:3]
 
-predicted_pokemon = class_names[predicted_index]
+    results = []
 
-confidence = predictions[0][predicted_index] * 100
+    for index in top_3:
 
-print(f"Predikert Pokémon: {predicted_pokemon}")
-print(f"Sannsynlighet: {confidence:.2f}%")
+        pokemon = class_names[index]
+        confidence = float(predictions[0][index] * 100)
+
+        results.append(
+            (pokemon, confidence)
+        )
+
+    return results
