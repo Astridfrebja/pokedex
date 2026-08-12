@@ -17,16 +17,15 @@ body{
 
 }
 
-/* Hele pokédexen */
 #pokedex{
 
     position:relative;
 
-    width:800px;
+    width:90vw;
+    max-width:800px;
 
 }
 
-/* Rammen */
 #frame{
 
     display:block;
@@ -37,38 +36,132 @@ body{
 
 }
 
-/* Skjermen */
 #screen{
 
     position:absolute;
 
-    top: -103px;
-    left: 93px;
+    inset:0;
 
     width:100%;
 
     image-rendering:pixelated;
+
+}
+
+#button-image{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+
+    image-rendering:pixelated;
+
+    pointer-events:none;
+
+    transition:transform .08s;
+
+}
+
+#button-image.pressed{
+
+    transform:translate(2px,2px);
 
 }
 
 #button{
+
     position:absolute;
 
-    top:0;
-    left:0;
+    right:19.5%;
+    bottom:21%;
 
-    width:100%;
+    width:15%;
+    aspect-ratio:1;
 
+    background:transparent;
     border:none;
-    background:none;
-    padding:0;
+
     cursor:pointer;
 
-    transition:transform 0.05s;
+    z-index:100;
 
-    image-rendering:pixelated;
 }
 
-#button:active{
-    transform: translate(-2px,-2px);
+#menu{
+
+    position:absolute;
+
+    top:34%;
+    left:42%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+    opacity:0;
+
+    transform:translateY(8px);
+
+    pointer-events:none;
+
+    transition:
+        opacity .2s,
+        transform .2s;
+
+}
+
+#menu.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+    pointer-events:auto;
+
+}
+
+.menu-item{
+
+    color:#000;
+
+    background:transparent;
+
+    font-family:"Pixelify Sans", sans-serif;
+
+    font-weight:bold;
+
+    font-size:clamp(18px,4vw,32px);
+
+    cursor:pointer;
+
+    user-select:none;
+
+}
+
+.menu-item::before{
+
+    content:" ";
+
+}
+
+.selected::before{
+
+    content:"> ";
+
+    animation:blink .8s infinite;
+
+}
+
+@keyframes blink{
+
+    50%{
+
+        opacity:0;
+
+    }
+
 }

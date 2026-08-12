@@ -7,7 +7,15 @@
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
-          <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap"
+          rel="stylesheet">
 </head>
 
 <body>
@@ -21,19 +29,35 @@
         <img
             id="screen"
             src="{{ url_for('static', filename='images/skjerm.png') }}">
-        
-        <button id = "button">
-            <img 
-                src="{{ url_for('static', filename='images/knapp.png') }}">
-        </button>
+
+        <div id="menu">
+
+            <div class="menu-item selected" id="camera">
+                Kamera
+            </div>
+
+            <div class="menu-item" id="gallery">
+                Kamerarull
+            </div>
+
+        </div>
+
+        <button id="button"></button>
+
+        <img
+            id="button-image"
+            src="{{ url_for('static', filename='images/knapp.png') }}">
+
     </div>
 
     <input
-    type="file"
-    id="image-picker"
-    accept="image/*"
-    capture="environment"
-    hidden>
+        type="file"
+        id="image-picker"
+        accept="image/*"
+        capture="environment"
+        hidden>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 
